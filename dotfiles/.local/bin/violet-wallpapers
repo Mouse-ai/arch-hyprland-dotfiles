@@ -1,0 +1,50 @@
+#!/usr/bin/python
+from pathlib import Path
+import subprocess
+
+
+LABELS = {
+    "violet-desktop.png": "Violet · светлые",
+    "evergarden-serenity.webp": "Вайолет Эвергарден · у реки",
+    "mai-lilac-morning.webp": "Май · сиреневое утро",
+    "makima-midnight.webp": "Макима · бордовая ночь",
+    "sparxie-planarcadia.webp": "Искра · ночная Планаркадия",
+    "sparkle-moonstage.webp": "Искорка · лунная сцена",
+}
+
+
+def current_wallpapers(command):
+    result = subprocess.run(
+        ["caelestia", "shell", "wallpaper", command],
+        capture_output=True,
+        text=True,
+        timeout=3,
+    )
+    return result.stdout.splitlines() if result.returncode == 0 else []
+
+
+def main():
+    paths = list(dict.fromkeys(path for path in current_wallpapers("list") if Path(path).is_file()))
+    if not paths:
+        return
+    rank = {name: index for index, name in enumerate(LABELS)}
+    paths.sort(key=lambda path: (rank.get(Path(path).name, len(rank)), path.casefold()))
+
+    current = next(iter(current_wallpapers("get")), None)
+    menu = ["fuzzel", "--dmenu", "--index", "--minimal-lines", "--no-icons", "--width=41", "--prompt=Обои › "]
+    if current in paths:
+        menu.append(f"--select-index={paths.index(current)}")
+
+    labels = [LABELS.get(Path(path).name, Path(path).name) for path in paths]
+    selection = subprocess.run(menu, input="\n".join(labels) + "\n", capture_output=True, text=True)
+    selected = selection.stdout.strip()
+    if selection.returncode != 0 or not selected.isdecimal():
+        return
+
+    index = int(selected)
+    if index < len(paths) and paths[index] != current:
+        subprocess.run(["caelestia", "shell", "wallpaper", "set", paths[index]], check=True)
+
+
+if __name__ == "__main__":
+    main()

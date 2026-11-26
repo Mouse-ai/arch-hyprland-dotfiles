@@ -1,0 +1,130 @@
+{
+  "appearance": {
+    "font": {
+      "clock": "Noto Sans",
+      "workspaces": "Noto Sans",
+      "headline": {
+        "family": "Noto Sans",
+        "large": {
+          "family": "Cormorant Garamond"
+        }
+      },
+      "title": {
+        "family": "Noto Sans"
+      },
+      "body": {
+        "family": "Noto Sans"
+      },
+      "label": {
+        "family": "Noto Sans"
+      },
+      "mono": {
+        "family": "JetbrainsMono Nerd Font Mono"
+      }
+    }
+  },
+  "general": {
+    "showOverFullscreen": true,
+    "apps": {
+      "terminal": [
+        "kitty"
+      ],
+      "explorer": [
+        "thunar"
+      ]
+    },
+    "idle": {
+      "lockBeforeSleep": true,
+      "inhibitWhenAudio": false,
+      "timeouts": [
+        {
+          "timeout": 150,
+          "idleAction": [
+            "brightnessctl",
+            "-c",
+            "backlight",
+            "-s",
+            "set",
+            "10%"
+          ],
+          "returnAction": [
+            "brightnessctl",
+            "-c",
+            "backlight",
+            "-r"
+          ]
+        },
+        {
+          "timeout": 300,
+          "idleAction": "lock"
+        },
+        {
+          "timeout": 330,
+          "idleAction": "dpms off",
+          "returnAction": "dpms on"
+        },
+        {
+          "timeout": 1800,
+          "idleAction": [
+            "suspend"
+          ]
+        }
+      ]
+    }
+  },
+  "background": {
+    "desktopClock": {
+      "enabled": false,
+      "position": "middle-right",
+      "background": {
+        "enabled": true,
+        "opacity": 0.42,
+        "blur": true
+      }
+    }
+  },
+  "bar": {
+    "persistent": true,
+    "showOnHover": true,
+    "tray": {
+      "recolour": false,
+      "compact": true
+    },
+    "workspaces": {
+      "shown": 10,
+      "showUnoccupied": true,
+      "showWindows": true,
+      "displayType": "text",
+      "maxWindowIcons": 2,
+      "occupiedBg": false,
+      "activeIndicator": false,
+      "label": "·",
+      "occupiedLabel": "•",
+      "activeLabel": "🟣"
+    },
+    "activeWindow": {
+      "compact": true
+    },
+    "clock": {
+      "showIcon": false
+    }
+  },
+  "border": {
+    "thickness": 0,
+    "rounding": 0
+  },
+  "dashboard": {
+    "showWeather": true
+  },
+  "lock": {
+    "useWallpaper": true
+  },
+  "services": {
+    "clockFormat": "TwentyFourHour",
+    "weatherLocation": "56.8575,60.6125",
+    "weatherUnits": "Celsius"
+  },
+  "paths": {
+    "wallpaperDir": "~/Pictures/Wallpapers"
+  }
+}

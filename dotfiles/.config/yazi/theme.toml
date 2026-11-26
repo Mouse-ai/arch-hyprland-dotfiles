@@ -1,0 +1,69 @@
+#:schema https://yazi-rs.github.io/schemas/theme.json
+
+[app]
+overall = { fg = "#eae3f1" }
+
+[mgr]
+cwd = { fg = "#bfa0f5", bold = true }
+border_style = { fg = "#534461" }
+find_keyword = { fg = "#f0d2b1", bold = true }
+find_position = { fg = "#bfa0f5", bold = true }
+marker_selected = { fg = "#bfa0f5", bg = "#bfa0f5" }
+marker_copied = { fg = "#abd5ad", bg = "#abd5ad" }
+marker_cut = { fg = "#ec8899", bg = "#ec8899" }
+count_selected = { fg = "#171220", bg = "#bfa0f5" }
+
+[indicator]
+parent = { fg = "#d9cbea", bg = "#30243d" }
+current = { fg = "#fbf5ff", bg = "#53406b", bold = true }
+preview = { fg = "#d9bcff", underline = true }
+
+[tabs]
+active = { fg = "#171220", bg = "#bfa0f5", bold = true }
+inactive = { fg = "#bcaacc", bg = "#30243d" }
+
+[mode]
+normal_main = { fg = "#171220", bg = "#bfa0f5", bold = true }
+normal_alt = { fg = "#d9cbea", bg = "#30243d" }
+select_main = { fg = "#171220", bg = "#a6cedc", bold = true }
+select_alt = { fg = "#a6cedc", bg = "#30243d" }
+unset_main = { fg = "#171220", bg = "#ec8899", bold = true }
+unset_alt = { fg = "#ec8899", bg = "#30243d" }
+
+[status]
+overall = { fg = "#d9cbea", bg = "#21192d" }
+perm_sep = { fg = "#9686a5" }
+perm_type = { fg = "#bfa0f5" }
+
+[input]
+border = { fg = "#bfa0f5" }
+title = { fg = "#d9bcff", bold = true }
+selected = { fg = "#fbf5ff", bg = "#53406b" }
+
+[confirm]
+border = { fg = "#bfa0f5" }
+title = { fg = "#d9bcff", bold = true }
+
+[help]
+border = { fg = "#bfa0f5" }
+chord = { fg = "#d9bcff" }
+hovered = { fg = "#fbf5ff", bg = "#53406b", bold = true }
+
+[filetype]
+prepend_rules = [
+    { mime = "**/image/*", fg = "#d8b3cc" },
+    { mime = "**/{audio,video}/*", fg = "#bea8ec" },
+    { mime = "**/application/{pdf,doc,rtf}", fg = "#a6cedc" },
+    { url = "*/", fg = "#c7b0e5" },
+]
+
+[icon]
+prepend_dirs = [
+    { name = "Documents", text = "", fg = "#b3a1c9" },
+    { name = "Downloads", text = "", fg = "#b3a1c9" },
+    { name = "Pictures", text = "", fg = "#b3a1c9" },
+]
+prepend_conds = [
+    { if = "dir & hovered", text = "", fg = "#d9bcff" },
+    { if = "dir", text = "", fg = "#b3a1c9" },
+]

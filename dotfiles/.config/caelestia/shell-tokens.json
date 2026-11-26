@@ -1,0 +1,12 @@
+{
+  "sizes": {
+    "bar": {
+      "innerWidth": 32
+    },
+    "notifs": {
+      "width": 352,
+      "image": 34,
+      "badge": 18
+    }
+  }
+}
