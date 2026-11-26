@@ -7,6 +7,8 @@ Item {
     required property date now
     required property var widgetColors
 
+    readonly property color digitOutline: widgetColors.clockOutline ?? widgetColors.outline ?? "transparent"
+
     Item {
         id: design
 
@@ -30,7 +32,8 @@ Item {
             styleColor: root.widgetColors.outline ?? "transparent"
 
             font.family: "Cormorant Garamond"
-            font.pixelSize: 16
+            font.pixelSize: 16 + (root.widgetColors.smallTextBoost ?? 0)
+            font.weight: root.widgetColors.smallTextWeight ?? Font.Normal
             font.letterSpacing: 4
         }
 
@@ -42,8 +45,8 @@ Item {
             Text {
                 text: Qt.formatDateTime(root.now, "HH")
                 color: root.widgetColors.time
-                style: root.widgetColors.outline ? Text.Outline : Text.Normal
-                styleColor: root.widgetColors.outline ?? "transparent"
+                style: root.digitOutline.a > 0 ? Text.Outline : Text.Normal
+                styleColor: root.digitOutline
 
                 font.family: "Cormorant Garamond"
                 font.pixelSize: 96
@@ -54,8 +57,8 @@ Item {
             Text {
                 text: Qt.formatDateTime(root.now, "mm")
                 color: root.widgetColors.accent
-                style: root.widgetColors.outline ? Text.Outline : Text.Normal
-                styleColor: root.widgetColors.outline ?? "transparent"
+                style: root.digitOutline.a > 0 ? Text.Outline : Text.Normal
+                styleColor: root.digitOutline
 
                 font.family: "Cormorant Garamond"
                 font.pixelSize: 96
@@ -85,7 +88,8 @@ Item {
             styleColor: root.widgetColors.outline ?? "transparent"
 
             font.family: "Cormorant Garamond"
-            font.pixelSize: 17
+            font.pixelSize: 17 + (root.widgetColors.smallTextBoost ?? 0)
+            font.weight: root.widgetColors.smallTextWeight ?? Font.Normal
             font.letterSpacing: 2
         }
     }

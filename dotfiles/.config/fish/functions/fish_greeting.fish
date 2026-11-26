@@ -20,13 +20,13 @@ function fish_greeting
 
     printf '\n'
     for row in (seq (count $logo))
-        set_color bfa0f5
+        set_color magenta
         printf '  %-18s' "$logo[$row]"
         if test -n "$info[$row]"
-            set_color 9686a5
+            set_color brblack
             set -l padding (math 15 - (string length -- "$labels[$row]"))
             printf '%s%*s' "$labels[$row]" $padding ''
-            set_color eae3f1
+            set_color normal
             printf '%s' "$info[$row]"
         end
         printf '\n'

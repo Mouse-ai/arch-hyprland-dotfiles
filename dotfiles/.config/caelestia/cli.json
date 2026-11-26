@@ -1,1 +1,6 @@
-{ "theme": { "enableTerm": false } }
+{
+  "theme": {
+    "enableTerm": false,
+    "postHook": "\"$HOME/.local/bin/caelestia-terminal-theme\""
+  }
+}

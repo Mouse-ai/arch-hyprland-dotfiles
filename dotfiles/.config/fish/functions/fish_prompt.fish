@@ -1,7 +1,7 @@
 function fish_prompt
     set -l last_status $status
 
-    set_color bfa0f5
+    set_color magenta
     printf '%s' (prompt_pwd)
 
     set -l repo_root (command git rev-parse --show-toplevel 2>/dev/null)
@@ -11,18 +11,18 @@ function fish_prompt
         if test -z "$revision"
             set revision (command git rev-parse --short HEAD 2>/dev/null)
         end
-        set_color a6cedc
+        set_color cyan
         printf '  %s' "$repo_name"
         if test -n "$revision"
-            set_color 9686a5
+            set_color brblack
             printf ' · %s' "$revision"
         end
     end
 
     if test "$last_status" -eq 0
-        set_color bfa0f5
+        set_color magenta
     else
-        set_color ec8899
+        set_color red
         printf '  [%s]' "$last_status"
     end
 

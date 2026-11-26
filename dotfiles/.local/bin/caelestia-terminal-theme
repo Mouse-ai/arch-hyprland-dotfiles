@@ -1,0 +1,33 @@
+#!/bin/sh
+set -eu
+
+state_dir=${XDG_STATE_HOME:-"$HOME/.local/state"}/caelestia/theme
+config_dir=${XDG_CONFIG_HOME:-"$HOME/.config"}
+kitty_dir=${KITTY_CONFIG_DIRECTORY:-"$config_dir/kitty"}
+yazi_dir=${YAZI_CONFIG_HOME:-"$config_dir/yazi"}
+
+publish() {
+    source=$1
+    target=$2
+    [ -s "$source" ] || return 1
+    if grep -q '{{' "$source" || cmp -s -- "$source" "$target"; then
+        return 1
+    fi
+    mkdir -p -- "${target%/*}" || return 1
+    staging=$(mktemp -- "${target}.XXXXXX") || return 1
+    if ! cp -- "$source" "$staging" || ! mv -fT -- "$staging" "$target"; then
+        rm -f -- "$staging"
+        return 1
+    fi
+}
+
+if publish "$state_dir/kitty.conf" "$kitty_dir/caelestia-theme.conf"; then
+    pkill -USR1 -u "$(id -u)" -x kitty || :
+fi
+
+if publish "$state_dir/yazi.toml" "$yazi_dir/theme.toml"; then
+    # Receiver 0 broadcasts the action to all running Yazi instances.
+    if command -v ya >/dev/null; then
+        ya emit-to 0 app:theme >/dev/null 2>&1 || :
+    fi
+fi

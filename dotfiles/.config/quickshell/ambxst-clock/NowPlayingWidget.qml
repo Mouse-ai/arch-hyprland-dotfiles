@@ -57,7 +57,8 @@ Item {
             styleColor: root.widgetColors.outline ?? "transparent"
             elide: Text.ElideRight
             font.family: "Cormorant Garamond"
-            font.pixelSize: 19
+            font.pixelSize: 19 + (root.widgetColors.smallTextBoost ?? 0)
+            font.weight: root.widgetColors.smallTextWeight ?? Font.Normal
         }
     }
 }

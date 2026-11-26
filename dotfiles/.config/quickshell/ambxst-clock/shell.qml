@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
@@ -16,9 +17,10 @@ ShellRoot {
             line: "#A69B89", date: "#5C5349", weather: "#51483E"
         },
         "evergarden-serenity.webp": {
-            time: "#FFF8E5", accent: "#F6E4A7", muted: "#E6ECCD",
-            line: "#475B3C", date: "#F5F2DC", weather: "#FFF2C1",
-            outline: "#1E2D23"
+            time: "#FFFDF2", accent: "#F8ECBE", muted: "#F2F6E6",
+            line: "#88A38B", date: "#FFFDF2", weather: "#FFFDF2",
+            clockOutline: "#000000", smallTextBoost: 2, smallTextWeight: Font.DemiBold,
+            backdrop: { top: "#B01A291F", bottom: "#D4122119" }
         },
         "mai-lilac-morning.webp": {
             time: "#291733", accent: "#42284B", muted: "#37243F",
@@ -108,6 +110,38 @@ ShellRoot {
                 y: Math.max(8, Math.min(372, desktop.height - height * scale - 8))
                 transformOrigin: Item.TopLeft
 
+                Rectangle {
+                    id: backdropSource
+
+                    visible: false
+                    x: -14
+                    y: -14
+                    width: parent.width + 28
+                    height: (nowPlaying.visible ? nowPlaying.y + nowPlaying.height
+                                                : calendar.y + calendar.height) + 28
+                    radius: 38
+
+                    gradient: Gradient {
+                        GradientStop {
+                            position: 0
+                            color: desktopShell.widgetColors.backdrop?.top ?? "transparent"
+                        }
+                        GradientStop {
+                            position: 1
+                            color: desktopShell.widgetColors.backdrop?.bottom ?? "transparent"
+                        }
+                    }
+                }
+
+                MultiEffect {
+                    visible: !!desktopShell.widgetColors.backdrop
+                    source: backdropSource
+                    anchors.fill: backdropSource
+                    blurEnabled: true
+                    blurMax: 56
+                    blur: 1
+                }
+
                 ClockWidget {
                     now: desktopTime.date
                     widgetColors: desktopShell.widgetColors
@@ -123,6 +157,8 @@ ShellRoot {
                 }
 
                 CalendarWidget {
+                    id: calendar
+
                     today: desktopTime.date
                     widgetColors: desktopShell.widgetColors
                     x: 3
@@ -132,6 +168,8 @@ ShellRoot {
                 }
 
                 NowPlayingWidget {
+                    id: nowPlaying
+
                     widgetColors: desktopShell.widgetColors
                     y: 462
                     width: parent.width

@@ -5,7 +5,7 @@
 - **Hyprland** — Lua-конфиг с горячими клавишами, правилами окон, анимациями и автозапуском.
 - **Caelestia и Quickshell** — настройки оболочки, часы, календарь, погода и управление музыкой на рабочем столе.
 - **Violet** — тема экрана входа SDDM и переход к рабочему столу.
-- **Fish, Kitty и Yazi** — настройки оболочки, терминала и файлового менеджера.
+- **Fish, Kitty и Yazi** — палитра терминала и акценты файлового менеджера меняются вместе с темой Caelestia.
 
 ## Скриншоты
 
@@ -18,6 +18,18 @@
 
 </details>
 
+### Kitty
+
+Терминал с Fish и палитрой, подобранной по обоям.
+
+![Kitty с приветствием Fish и палитрой Caelestia](docs/screenshots/kitty.webp)
+
+### Yazi
+
+Тёмный полупрозрачный фон и акценты текущей темы. Отдельное окно открывается по **Super+Y**.
+
+![Yazi с деревом файлов и предпросмотром README](docs/screenshots/yazi.webp)
+
 [Все восемь обоев в оригинальном размере](dotfiles/Pictures/Wallpapers)
 
 ## Восстановление после переустановки
@@ -26,9 +38,9 @@
 
    ```bash
    sudo pacman -S --needed git python hyprland xdg-desktop-portal-hyprland \
-     xdg-desktop-portal-gtk pipewire wireplumber fish kitty yazi thunar \
+     xdg-desktop-portal-gtk pipewire wireplumber fish kitty yazi thunar fuzzel \
      wl-clipboard cliphist brightnessctl playerctl libnotify grim slurp \
-     gpu-screen-recorder ttf-jetbrains-mono-nerd ttf-material-symbols-variable
+     gpu-screen-recorder ttf-jetbrains-mono-nerd ttf-material-symbols-variable ttf-cormorant
    ```
 
 2. Установите пакеты Caelestia из AUR привычным способом. Окружение проверялось с Hyprland 0.57.2, Caelestia Shell 2.5.0, Caelestia CLI 1.1.3 и `quickshell-git` 0.3.2.r11. Виджеты используют файлы из `/etc/xdg/quickshell/caelestia`, которые ставит пакет `caelestia-shell`.
@@ -52,6 +64,8 @@
    ```bash
    caelestia shell wallpaper set "$HOME/Pictures/Wallpapers/evergarden-serenity.webp"
    ```
+
+   При смене обоев Caelestia обновляет цвета Kitty и Yazi. Шаблоны лежат в каталоге `~/.config/caelestia/templates/`.
 
 ## Экран входа Violet
 

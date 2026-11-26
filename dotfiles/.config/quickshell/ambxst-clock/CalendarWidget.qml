@@ -39,8 +39,8 @@ Item {
                 styleColor: root.widgetColors.outline ?? "transparent"
 
                 font.family: "Cormorant Garamond"
-                font.pixelSize: header ? 13 : 19
-                font.weight: highlighted ? Font.Bold : Font.Medium
+                font.pixelSize: (header ? 13 : 19) + (root.widgetColors.smallTextBoost ?? 0)
+                font.weight: highlighted ? Font.Bold : (root.widgetColors.smallTextWeight ?? Font.Medium)
                 font.underline: highlighted
                 font.features: { "lnum": 1, "tnum": 1 }
             }
